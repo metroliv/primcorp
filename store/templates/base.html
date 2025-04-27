@@ -1,0 +1,374 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}PrimCorp - Systems and Services{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+  <meta name="description" content="PrimCorp offers high-quality systems and services tailored to your needs.">
+  <meta name="keywords" content="systems, services, software, technology, PrimCorp">
+  <meta name="author" content="PrimCorp">
+
+  <style>
+    /* Hover effect for navbar links */
+    .nav-link {
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #ffd700 !important; /* Golden color on hover */
+    }
+
+    /* Dropdown menu animation */
+    .dropdown-menu {
+      animation: dropdownFade 0.5s ease forwards;
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    @keyframes dropdownFade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Show dropdown properly */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Sticky navbar */
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+    }
+
+
+   
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-container {
+    height: 90vh;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Buttons hover + shadow effect */
+  .custom-btn {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .custom-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Carousel fade smoother */
+  .carousel-fade .carousel-item {
+    opacity: 0;
+    transition-duration: 1s;
+    transition-property: opacity;
+  }
+  .carousel-fade .carousel-item.active,
+  .carousel-fade .carousel-item-next.carousel-item-start,
+  .carousel-fade .carousel-item-prev.carousel-item-end {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .custom-btn {
+    position: relative;
+    overflow: hidden;
+    background-color: #28a745; /* Green */
+    color: white;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
+}
+
+.custom-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: #fff;
+    transition: all 0.4s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.custom-btn:hover {
+    background-color: #218838; /* Darker Green */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.custom-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.custom-btn:focus, .custom-btn:active {
+    outline: none;
+}
+/* Custom Styles for Filters */
+#searchInput {
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#filterSelect,
+#priceFilter {
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+#filterSelect:focus,
+#priceFilter:focus,
+#searchInput:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f1f1f1;
+    color: #495057;
+}
+
+@media (max-width: 767px) {
+    .col-md-6, .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+
+  </style>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm sticky-top" data-aos="fade-down">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white fw-bold" href="#">
+      <i class="fas fa-cogs me-2"></i>PrimCorp
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/"><i class="fas fa-home me-1"></i>Home</a>
+        </li>
+
+        <!-- Services Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-concierge-bell me-1"></i>Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+            <li><a class="dropdown-item" href="#">IT Consulting</a></li>
+            <li><a class="dropdown-item" href="#">Custom Software</a></li>
+            <li><a class="dropdown-item" href="#">Maintenance & Support</a></li>
+          </ul>
+        </li>
+
+        <!-- Systems Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="systemsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-network-wired me-1"></i>Systems
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="systemsDropdown">
+            <li><a class="dropdown-item" href="#">ERP Systems</a></li>
+            <li><a class="dropdown-item" href="#">CRM Platforms</a></li>
+            <li><a class="dropdown-item" href="#">Inventory Solutions</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<header class="hero text-white text-center py-5 position-relative" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0">
+    <div class="background-shapes"></div> <!-- just shapes -->
+  
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+  
+        <!-- First Image Slide -->
+        <div class="carousel-item active position-relative">
+          <div class="hero-image-container">
+            <img src="https://img.freepik.com/premium-photo/onsite-it-support-young-it-specialist-ready-fix-server_590464-17680.jpg?ga=GA1.1.2139467611.1745760184&semt=ais_hybrid&w=740" class="d-block w-100 hero-image" alt="First Image">
+          </div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="display-4 fw-bold">
+              <span id="typed-text">Welcome to PrimCorp</span>
+            </h1>
+            <p class="lead mb-4">Explore our high-quality software solutions designed for all your business, organizational, and personal needs.</p>
+            <div class="d-flex justify-content-center">
+              <a href="#systems" class="btn btn-light btn-lg me-3 custom-btn">Explore Our Systems</a>
+              <a href="#services" class="btn btn-success btn-lg custom-btn">Explore Our Services</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Second Image Slide -->
+        <div class="carousel-item position-relative">
+          <div class="hero-image-container">
+            <img src="{% static 'images/image2.jpg' %}" class="d-block w-100 hero-image" alt="Second Image">
+          </div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="display-4 fw-bold">
+              <span>Welcome to PrimCorp</span>
+            </h1>
+            <p class="lead mb-4">Explore our high-quality software solutions designed for all your business, organizational, and personal needs.</p>
+            <div class="d-flex justify-content-center">
+              <a href="#systems" class="btn btn-light btn-lg me-3 custom-btn">Explore Our Systems</a>
+              <a href="#services" class="btn btn-success btn-lg custom-btn">Explore Our Services</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Third Image Slide -->
+        <div class="carousel-item position-relative">
+          <div class="hero-image-container">
+            <img src="https://img.freepik.com/premium-photo/directly-shot-laptop-with-mother-board-work-tools-white-table_1048944-11816946.jpg?w=996" class="d-block w-100 hero-image" alt="Third Image">
+          </div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="display-4 fw-bold">
+              <span>Welcome to PrimCorp</span>
+            </h1>
+            <p class="lead mb-4">Explore our high-quality software solutions designed for all your business, organizational, and personal needs.</p>
+            <div class="d-flex justify-content-center">
+              <a href="#systems" class="btn btn-light btn-lg me-3 custom-btn">Explore Our Systems</a>
+              <a href="{% url 'all_services' %}" class="btn btn-success btn-lg custom-btn">Explore Our Services</a>
+
+            </div>
+          </div>
+        </div>
+  
+      </div>
+  
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+  
+  
+  
+    
+    
+    
+    <!-- Main Content -->
+    <div class="container my-5">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2025 PrimCorp. All Rights Reserved.</p>
+            <p>Follow us on 
+                <a href="#" class="text-white">Facebook</a>, 
+                <a href="#" class="text-white">Twitter</a>, 
+                <a href="#" class="text-white">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+   <!-- AOS Animation JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    once: true,   
+    duration: 1000 
+  });
+  <!-- Typewriter Effect -->
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    new Typed('#typed-text', {
+      strings: ["Welcome to PrimCorp", "Your Tech Partner", "Building Your Future"],
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 2000,
+      loop: true
+    });
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+</html>

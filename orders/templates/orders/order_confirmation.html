@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation - PrimCorp{% endblock %}
+
+{% block content %}
+<style>
+/* Order Confirmation Styles */
+.confirmation-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Header Styles */
+h1.display-4 {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.order-id {
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.order-details p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.order-details strong {
+    font-weight: bold;
+    color: #34495e;
+}
+
+/* Status Badge Styles */
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status.completed {
+    color: #2ecc71;
+}
+
+.status.pending {
+    color: #f39c12;
+}
+
+.status.cancelled {
+    color: #e74c3c;
+}
+
+/* Additional Info and Chat Section */
+.mt-4 {
+    margin-top: 30px;
+}
+
+h4 {
+    color: #34495e;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+a.text-primary {
+    color: #3498db;
+}
+
+a.text-primary:hover {
+    color: #2980b9;
+}
+
+.btn-outline-success {
+    border-color: #2ecc71;
+    color: #2ecc71;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-success:hover {
+    background-color: #2ecc71;
+    color: white;
+}
+
+/* Button Styling */
+.btn-outline-primary {
+    border-color: #f39c12;
+    color: #f39c12;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background-color: #f39c12;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .confirmation-card {
+        padding: 20px;
+    }
+
+    .btn-outline-primary, .btn-outline-success {
+        width: 100%;
+    }
+}
+
+
+</style>
+
+    <div class="container my-5">
+        <h1 class="display-4 text-center">Order Confirmation</h1>
+
+        <div class="confirmation-card shadow p-4 mt-5">
+            <p class="lead">Thank you, <strong>{{ order.customer_name }}</strong>!</p>
+            <p>Your order has been placed successfully. Below are the details:</p>
+
+            <div class="order-details">
+                <p><strong>Order ID:</strong> <span class="order-id">{{ order.id }}</span></p>
+                <p><strong>System/Service:</strong> 
+                    {% if order.system %}
+                        <span>{{ order.system.name }}</span>
+                    {% else %}
+                        <span>{{ order.service.title }}</span>
+                    {% endif %}
+                </p>
+                <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                <p><strong>Status:</strong> <span class="status {{ order.status|lower }}">{{ order.status }}</span></p>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div class="mt-4">
+                <h4>Need to Share More Details?</h4>
+                <p>If you have more details to share regarding your order or any special requests, feel free to <a href="/contact-us" class="text-primary">contact us</a>. We’re happy to assist you!</p>
+
+                <h4>Chat with Us</h4>
+                <p>Have questions or need assistance? Chat with us in real-time by clicking the button below. Our support team is available to help you!</p>
+                <div class="text-center mt-3">
+                    <a href="/chat" class="btn btn-outline-success btn-lg">Start Chat</a>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p>We will reach out to you soon to confirm your order and discuss any additional details. Please make sure your contact information is up to date.</p>
+                <a href="/" class="btn btn-outline-primary btn-lg">Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
