@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-@dfs2u=m0!wnb-151wgh%l1-u8i5gph^c4o!vj-vc^r+=vwgrc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'primecorp.up.railway.app']
+
 
 
 # Application definition
