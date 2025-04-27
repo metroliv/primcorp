@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@dfs2u=m0!wnb-151wgh%l1-u8i5gph^c4o!vj-vc^r+=vwgrc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -96,6 +96,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+# settings.py
+
+# Define the directory where collected static files will be stored
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 MEDIA_URL = '/media/'
