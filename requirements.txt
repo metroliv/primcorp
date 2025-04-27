@@ -23,3 +23,5 @@ Twisted==24.11.0
 txaio==23.1.1
 typing_extensions==4.13.2
 zope.interface==7.2
+gunicorn==23.0.0
+dj-database-url==0.5.0
